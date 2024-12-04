@@ -1,13 +1,17 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 export const Login = () => {
+  const navigate=useNavigate();
+  const HandelChange=()=>{
+    navigate("/user/change")
+  }
   return (
     <div>
                 <input type='text' placeholder='userName'/>
                 <input type='password' placeholder='Password'/>
                 <button>Login</button>
-                <button><NavLink to="change">change password</NavLink></button>
+                <button onClick={()=>HandelChange()}>change password</button>
     </div>
   )
 }

@@ -11,47 +11,74 @@ import { Login } from './routes/Login.jsx';
 import { User } from './routes/User.jsx';
 import { ChangePassword } from './routes/ChangePassword.jsx';
 import { UserProfile } from './routes/UserProfile.jsx';
+import { ProtectedRoute } from './routes/utils/ProtectedRoute.jsx';
 const routes=createBrowserRouter([
   {
     path:"/",
-    element:<Root/>,
+    element:(
+        <Root/>
+    ),
     errorElement:<Error/>,
     children:[
       {
         index:true,
-        element:<Index/>
+        element:(
+          <ProtectedRoute><Index/></ProtectedRoute>
+        )
       },
       {
         path:"faq",
-        element:<Faq/>
+        element:(
+          <ProtectedRoute>
+            <Faq/>
+          </ProtectedRoute>
+        )
       },
       {
         path:"products",
-        element:<Products/>
+        element:(
+          <ProtectedRoute>
+            <Products/>
+          </ProtectedRoute>
+        )
       },
     ]
   },
   {
     path:"/user",
-    element:<User/>,
+    element:(
+        <User/>
+    ),
     children:[
       {
         index:true,
-        element:<div>User</div>
+        element:(
+          <ProtectedRoute>
+            <h1>user home page</h1>
+          </ProtectedRoute>
+        )
       },
       {
         path:":id",
-        element:<UserProfile/>
-      },
-      {
-        path:"login",
-        element:<Login/>
+        element:(
+          <ProtectedRoute>
+            <UserProfile/>
+          </ProtectedRoute>
+        )
       },
       {
         path:"change",
-        element:<ChangePassword/>
+        element:(
+          <ProtectedRoute>
+            <ChangePassword/>
+          </ProtectedRoute>
+        )
       },
     ]
+  },
+  {
+    path:"/login",
+    element:<Login/>
   },
 ]);
 const root = ReactDOM.createRoot(document.getElementById('root'));
